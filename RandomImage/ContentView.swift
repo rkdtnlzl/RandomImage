@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-
 struct ContentView: View {
-    let list = [
+    
+    @State private var list = [
         "첫번째 색션",
         "두번째 색션",
         "세번째 색션",
@@ -19,8 +19,8 @@ struct ContentView: View {
     var body: some View {
         NavigationStack {
             ScrollView(.vertical) {
-                ForEach(list, id: \.self) { item in
-                    makeSection(item)
+                ForEach(Array(list.enumerated()), id: \.element) { index, item in
+                    makeSection(item, index: index)
                 }
                 .padding(.leading)
             }
@@ -28,13 +28,13 @@ struct ContentView: View {
         }
     }
     
-    func makeSection(_ title: String) -> some View {
+    func makeSection(_ title: String, index: Int) -> some View {
         VStack {
             Text(title)
                 .padding(.top, 30)
                 .font(.headline)
                 .frame(maxWidth: .infinity, alignment: .leading)
-            HorizontalSectionView()
+            HorizontalSectionView(sectionTitle: $list[index])
         }
     }
 }

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct HorizontalSectionView: View {
+    
     let urls = [
         "https://picsum.photos/200/300?random=1",
         "https://picsum.photos/200/300?random=2",
@@ -16,6 +17,8 @@ struct HorizontalSectionView: View {
         "https://picsum.photos/200/300?random=5",
         "https://picsum.photos/200/300?random=6"
     ]
+    
+    @Binding var sectionTitle: String
     
     @State private var selectedImage: Image? = nil
     @State private var isDetailViewActive = false
@@ -33,15 +36,12 @@ struct HorizontalSectionView: View {
                 }
             }
             .navigationDestination(isPresented: $isDetailViewActive) {
-                if let image = selectedImage {
-                    PosterDetailView(image: image)
-                }
+                PosterDetailView(sectionTitle: $sectionTitle, image: selectedImage)
             }
         }
     }
 }
 
 #Preview {
-    HorizontalSectionView()
+    HorizontalSectionView(sectionTitle: .constant("Sample Section"))
 }
-

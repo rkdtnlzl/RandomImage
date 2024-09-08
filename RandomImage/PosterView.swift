@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct PosterView: View {
+    
     let url: String
-    var onImageSelected: (Image) -> Void
+    var onImageSelected: (Image) -> Void = { _ in }
     
     var body: some View {
         AsyncImage(url: URL(string: url)) { data in
@@ -39,5 +40,5 @@ struct PosterView: View {
 }
 
 #Preview {
-    PosterView(url: "https://picsum.photos/200/300") { _ in }
+    PosterView(url: "https://picsum.photos/200/300")
 }

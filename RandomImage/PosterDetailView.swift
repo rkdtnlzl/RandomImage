@@ -9,6 +9,7 @@ import SwiftUI
 
 struct PosterDetailView: View {
     
+    @Binding var sectionTitle: String
     let image: Image?
     
     var body: some View {
@@ -26,12 +27,15 @@ struct PosterDetailView: View {
                     .frame(width: 200, height: 300)
                     .clipShape(RoundedRectangle(cornerRadius: 20))
             }
+            
+            TextField("섹션 제목 입력", text: $sectionTitle)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .padding()
+                .background(Color.gray.opacity(0.2))
         }
-        .navigationTitle("Detail View")
-        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
 #Preview {
-    PosterDetailView(image: Image(systemName: "star"))
+    PosterDetailView(sectionTitle: .constant(""), image: Image(systemName: "star"))
 }
